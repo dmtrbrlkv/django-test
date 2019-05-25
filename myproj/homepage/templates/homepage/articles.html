@@ -1,0 +1,173 @@
+{% extends 'homepage/base.html' %}
+
+{% block title%}
+Articles
+{% endblock %}
+
+{% block body %}
+
+<div>
+ {% for num in articles  %}
+  {% if num == 1 %}
+    <h1>Article {{ num }}</h1>
+  {% elif num == 2 %}
+    <h2>Article {{ num }}</h2>
+  {% else %}
+    <h3>Article {{ num }}</h3>
+  {% endif %}
+ {% endfor %}
+
+  {% for num in articles  %}  
+    <h{{ num }}>Article {{ num }}</h{{ num }}>
+ {% endfor %}
+</div>
+<ul class="list-group">
+    {% comment %}
+  <li class="list-group-item">Dapibus ac facilisis in</li>
+  <li class="list-group-item list-group-item-secondary">A simple secondary list group item</li>
+    {% endcomment %}
+
+    {% for num in articles %}
+      {% cycle val1 val2 as val silent %}
+      <li class="list-group-item {% cycle 'list-group-item-primary' 'list-group-item-secondary' %}">Article # {{ num }} {{val}}</li>
+    {% endfor %}
+
+    {% cycle 'OK' 'BAD' 'NORMAL' as status silent %}
+
+    <h1>IT's {{ status }}</h1>
+    <h1>IT's {{ status }}</h1>
+
+    {% cycle status %}
+    <h1>IT's {{ status }}</h1>
+    <h1>IT's {{ status }}</h1>
+
+    {% cycle status %}
+    <h1>IT's {{ status }}</h1>
+    <h1>IT's {{ status }}</h1>
+
+
+</ul>
+
+<div>
+  <h1>first of: {% firstof f1 f2 f3 'No Val' %}</h1>
+</div>
+
+<div>
+  {{ obj }}
+  {{ obj.foo }}
+</div>
+
+<div>
+  <br>
+{{ obj.data}}
+
+<br>
+{{ obj.data.spam}}
+
+<br>
+{{ obj.list}}
+
+<br>
+{{ obj.list.3}}
+</div>
+
+
+<div>
+  {% if obj.list|length > 4 %}
+    <h3>больше 4</h3>
+  {% else %}
+    <h3>меньше или равно 4</h3>
+  {% endif %}
+</div>
+
+<div>
+  {{ obj.list.2|add:"5" }}
+
+
+  <pre><h3>{{ str_for_center|center:20 }}</h3></pre>
+
+  <pre><h3>{{ str_for_center|capfirst }}</h3></pre>
+
+  <pre><h3>{{ str_title|title }}</h3></pre>
+
+  <pre><code>{{ string|linenumbers }}</code></pre>
+{{ string|linebreaks }}
+
+<br>
+{{ string|linebreaksbr }}
+
+<br>
+
+{% now "j F Y G:i" %}
+<br>
+today: {{ current|date:"j F Y" }}
+<br>
+today: {{ current|date:"DATE_FORMAT"}}
+
+</div>
+
+{% comment %}
+  
+{% endcomment %}
+
+<div>
+    {% for a_date in dates %}
+    {% ifchanged a_date.month %}
+      <br>
+      <h3>{{ a_date|date:"F" }}</h3>
+    {% endifchanged %}
+    {% ifchanged a_date.date %}
+        <hr>
+        <h4>Time: {{ a_date|date:"DATE_FORMAT" }}</h4>
+    {% else %}
+      ;
+    {% endifchanged %}  
+    {{ a_date|date:"TIME_FORMAT" }}
+    {% endfor %}
+</div>
+
+
+<div>
+  {% spaceless %}
+    <p>
+      <span>SPAN VALUE
+      </span>
+      <p>PARAGRAPH</p>
+      <a href="google.ru">google</a>
+    </p>
+  {% endspaceless %}
+</div>
+
+
+<div>
+  {% for item in items  %}
+    <ul class="list-group">
+      <li class="list-group-item">{{ item }} berr{{ item|pluralize:"y,ies" }}</li>
+    </ul>
+  {% endfor %} 
+</div>
+
+<pre>
+  openblock {% templatetag openblock %}
+  closeblock {% templatetag closeblock %}
+  closevariable {% templatetag closevariable %}
+  openbrace {% templatetag openbrace %}
+  opencomment {% templatetag opencomment %}
+</pre>
+
+<pre>
+  {% verbatim %}
+    {% for item in items  %}
+      berr{{ item|pluralize:"y,ies" }}
+    {% endfor %} 
+  {% endverbatim %}
+</pre>
+
+<br>
+{{ int_val|add:"3" }}
+<br>
+{{ str_val|add:"3" }}
+
+{% endblock %}
+
+

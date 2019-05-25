@@ -1,0 +1,28 @@
+{% extends "authors/base.html" %}
+
+{% block title %}
+	Index of authors
+{% endblock title %}
+
+{% load email_domain %}
+{% load random_text %}
+
+{% block body %}
+	<h1>Authors:</h1>
+	<hr>
+	{% get_text %}
+	<hr>
+	{% get_text 1 %}
+	{% get_text 2 %}
+	{% get_text 2 %}
+	{% get_text 'abs' %}
+	
+	<hr>
+	<div>
+		<ul class="list-group">
+		{% for author in authors  %}
+			<li class="list-group-item">{{ author.id }}. {{ author }} | {{ author.email|test_filter }}</li>
+		{% endfor %} 
+		</ul>		
+	</div>
+{% endblock body %}
